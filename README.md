@@ -1,202 +1,190 @@
-# 💪 B14-A7-Bazar Dor
+# বাজার দর (BazarDor) 🛒
 
----
+**প্রতিদিনের বাজার দাম এক নজরে** - বাংলাদেশের সকল বাজারের আজকের পণ্যের দাম, দামের পরিবর্তন এবং ট্রেন্ড এক জায়গায়। স্মার্ট কেনাকাটা করুন।
 
-## 📅 Deadline For 60 marks: 10 October | ⏱️11:59PM
-## 📅 Deadline For 50 marks: 11 October | ⏱️11:59PM
-## 📅 Deadline for 30 marks: Any time after 11 October 2026
+## 📖 Project Description
 
----
-# API's
+BazarDor (বাজার দর) is a modern, responsive web application built with Next.js 14 that provides real-time market prices for daily commodities in Bangladesh. Users can browse products by category, view price trends (risers/fallers), and see detailed price breakdowns across different markets. The application features a clean Bengali interface with Hind Siliguri typography, making it accessible to local users.
 
-## BASE_URL_1: https://api.api-store.workers.dev/api/bazardor
-## BASE_URL_2: https://api.abcz.workers.dev/api/bazardor (alternative)
+## 🛠️ Technologies Used
 
-Endpoints:  
-**All Products:**
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Typography**: Hind Siliguri (Google Fonts)
+- **Authentication**: BetterAuth (Email/Password + Google + GitHub OAuth)
+- **Notifications**: React Hot Toast
+- **Icons**: Lucide React / Heroicons
+- **API Integration**: Primary & Fallback API endpoints with automatic failover
+- **Deployment**: Vercel/Netlify/Cloudflare Pages ready
+
+## ✨ Key Features
+
+1. **🏠 Responsive Homepage** - Hero section with CTA, price ticker (marquee), top 6 price risers, top 6 price fallers, and complete product grid with Bengali numerals
+2. **📂 Category Pages** - Dynamic category filtering with sort controls (Default, Price Low to High, Price High to Low), skeleton loading states, and empty state handling
+3. **📦 Product Detail Pages** - Protected routes showing product summary, price statistics (Min/Max/Avg), and market-wise price breakdowns
+4. **🔐 Authentication System** - Sign In/Sign Up with email/password, Google & GitHub OAuth, toast notifications, and protected routes
+5. **👤 User Profile** - Profile view with avatar, update information feature via BetterAuth, and sign out functionality
+6. **🎨 Design System** - Complete UI component library with design tokens, Hind Siliguri typography, Bengali numeral support, and WCAG AA accessible components
+7. **🔄 API Failover** - Automatic fallback from primary to secondary API endpoint on network/server errors
+8. **♿ Accessibility** - Semantic HTML, ARIA labels, focus management, keyboard navigation, and screen reader support
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm/yarn/pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd bazardor-ui
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your API keys and BetterAuth credentials
+
+# Run development server
+npm run dev
 ```
-/products
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Environment Variables
+
+```env
+# API Configuration
+NEXT_PUBLIC_API_URL_1=https://api.api-store.workers.dev/api/bazardor
+NEXT_PUBLIC_API_URL_2=https://api.abcz.workers.dev/api/bazardor
+
+# BetterAuth Configuration
+BETTER_AUTH_SECRET=your-secret-key
+BETTER_AUTH_URL=http://localhost:3000
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# GitHub OAuth
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
 ```
 
-**Filter:**
+## 📁 Project Structure
+
 ```
-/products?category=chal
-```    
-**Single Product:**
+src/
+├── app/                    # Next.js App Router pages
+│   ├── api/auth/          # Authentication API routes
+│   ├── category/[slug]/   # Category pages
+│   ├── product/[slug]/    # Product detail pages (protected)
+│   ├── signin/            # Sign in page
+│   ├── signup/            # Sign up page
+│   ├── profile/           # User profile pages
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   ├── loading.tsx        # Global loading UI
+│   └── not-found.tsx      # 404 page
+├── components/
+│   ├── ui/                # Reusable UI components
+│   │   ├── Button.tsx
+│   │   ├── Input.tsx
+│   │   ├── Card.tsx
+│   │   ├── Badge.tsx
+│   │   └── Skeleton.tsx
+│   ├── layout/            # Layout components
+│   │   ├── Navbar.tsx
+│   │   ├── PriceTicker.tsx
+│   │   └── Footer.tsx
+│   └── home/              # Home-specific components
+│       ├── Hero.tsx
+│       └── ProductCard.tsx
+├── lib/
+│   ├── api.ts             # API client with failover
+│   ├── auth.ts            # BetterAuth configuration
+│   ├── design-tokens.ts   # Design system tokens
+│   └── utils.ts           # Utility functions
+├── types/
+│   └── index.ts           # TypeScript definitions
+└── styles/
+    └── globals.css        # Global styles & Tailwind
 ```
-/products/1
-```
 
-**Categories:**
-```
-/categories
-```    
+## 🌐 API Endpoints
 
-**Single Category:**
-```
-/categories/chal
-```
+| Endpoint | Description |
+|----------|-------------|
+| `GET /products` | All products |
+| `GET /products?category={slug}` | Products by category |
+| `GET /products/{id}` | Single product |
+| `GET /categories` | All categories |
+| `GET /categories/{slug}` | Category with products |
 
----
+**Primary API**: `https://api.api-store.workers.dev/api/bazardor`  
+**Fallback API**: `https://api.abcz.workers.dev/api/bazardor`
 
-## 🐣 Basic Requirements (Must Do for Everyone)
-- Your app must work on all screen sizes — mobile, tablet, and desktop
-- Make at least 8 Git commits with clear, meaningful messages
-- Your app must run without any errors after deployment
-- Add a nice README.md file with your project name, description, technologies used, and features(minimum 5)
+## 🎨 Design Tokens
 
----
+The project uses a comprehensive design system defined in `src/lib/design-tokens.ts` including:
 
-# 🔧 Main Requirements — 50 Marks
+- **Colors**: Primary, Accent, Success, Danger, Warning, Neutral scales
+- **Typography**: Hind Siliguri font with responsive sizing
+- **Spacing**: Consistent spacing scale
+- **Border Radius**: Rounded corners
+- **Shadows**: Elevation levels
+- **Animations**: Marquee, fade-in, slide-up, pulse
+- **Breakpoints**: Mobile, Tablet, Desktop, Large Desktop
 
+## ♿ Accessibility Features
 
-### 1. 🔝 Navbar
+- Semantic HTML5 elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)
+- ARIA labels and roles for dynamic content
+- Focus-visible outlines for keyboard navigation
+- WCAG AA color contrast compliance
+- Screen reader compatible price ticker (aria-live)
+- Bengali language support (`lang="bn"`)
 
-- Design the Navbar exactly like the Figma.
-- Put your logo on the left side: `🛒 বাজার দর` + Bangla date underneath.
-- Put your navigation links in a second row / middle — category links.
-- The active category link should look different (highlighted).
-- **Right-side auth buttons**: `সাইন ইন` + `সাইন আপ`. When logged in, show profile / sign-out instead.
-- **Price ticker (marquee) below navbar**: infinite scrolling strip showing `emoji + name + দাম টাকা/একক + ▲/▼ %` 
+## 📱 Responsive Breakpoints
 
----
+- **Mobile**: < 640px (1 column grid)
+- **Tablet**: 640px - 1024px (2 column grid)
+- **Desktop**: 1024px - 1280px (3 column grid)
+- **Large Desktop**: > 1280px (4 column grid)
 
-### 2. 🅱️ Hero / Banner
+## 🔐 Authentication Flow
 
-- Eyebrow / small text
-- Main heading
-- Subtitle
-- A primary **CTA button**
-  - It scrolls the user down to the `#সব-পণ্য` section on the same page (an anchor link, not a route change).
-- A **banner/hero image** on the right side..
+1. User visits `/signin` or `/signup`
+2. Email/password or social login (Google/GitHub)
+3. BetterAuth creates session
+4. Protected routes (`/product/[slug]`, `/profile`, `/profile/update`) check session
+5. Unauthenticated users redirected to `/signin` with toast notification
+6. Profile update via BetterAuth's `updateUser` API
 
+## 🚀 Deployment
 
----
+The application is ready for deployment on:
+- **Vercel** (recommended for Next.js)
+- **Netlify**
+- **Cloudflare Pages**
 
-### 3. ⚖️ The Product Sections (Home Page)
+Build command: `npm run build`  
+Output directory: `.next`
 
-- **Section A — “আজ দাম বেড়েছে ▲”**: Top 6 risers. 
-- **Section B — “আজ দাম কমেছে ▼”**: Top 6 fallers. 
-- **Section C — “সব পণ্য” with subtitle** .
-- Display all products from JSON data as cards in a **responsive grid** (3-4 cols on large screens, collapses on mobile). Must be responsive.
-- Each card must show:
-  - 📷 Emoji / illustration (e.g. `🍚 🫘 🫙 🥔 🧅 🌶️ 🐟 🍗 🥚 🫚 🧄`)
-  - 📛 Product name (e.g. “স্বর্ণমাছি চাল”, “মিনিকেট চাল”, “ইলিশ মাছ”, “পেঁয়াজ”)
-  - 🖇️ Unit line (e.g. `প্রতি কেজি`, `প্রতি লিটার`, `প্রতি ডজন`, `প্রতি পিস`)
-  - 🔴 Price row: label `আজকের দাম` + value (e.g. `১৪৮ টাকা`, `১,৮৫০ টাকা` — Bengali digits) + change badge `▲ ২.১% / ▼ ২.৯% / —০.০%` (green up, red down, gray flat)
-- 🧭 Clicking a card navigates the user to that product’s **Detail Page**.
+## 📄 License
 
----
+This project is created for educational purposes (Programming Hero Assignment 7).
 
-### 4. Product Details Page — Layout (`/product/[slug]`)
+## 🔗 Links
 
-**Protected route — requires login.**
-
-**Top — Summary:**
-- Emoji + Title
-- Subtitle/description (market summary line)
-- Category tags (e.g. `সবজি`, `চাল`)
-- Unit (`প্রতি কেজি / লিটার / ডজন / পিস`)
-
-
-**Price - Summary** 
-- Minimum Price
-- Maximum Price 
-- Average Price 
-
-
-**বাজারভিত্তিক আজকের দাম** 
-- Show all the data like figma based on different Bazar. You can do this section Design like figma or as you want. 
-
-
-### 5. Category Page
-- Title + icon 
-- **Sort control**: `সাজান: ডিফল্ট | দাম: কম থেকে বেশি | দাম: বেশি থেকে কম` (see C1).
-- **Loading state**: show skeleton / “Loading…” while fetching before the list renders.
-- **Product cards list**: same card design as Home (thumbnail emoji, title e.g. “আলু”, “পেঁয়াজ”, “ঢেঁড়স”, unit e.g. “প্রতি কেজি”, price + change badge).
-- **Empty state** (when category has no items / invalid slug): 404-style message + CTA button **“হোম পেজে ফিরে যান”** (links back to `/`).
-
-
-### 6. Authentication (`/signin`, `/signup`)
-
-- **Sign In**: User Login: The user will  show  a Login page with a form , so that the user can Log in this application. 
-    - Show a Title for Login.  & Form with following fields ( Email , Password , Login button ) 
-    - If the user Login successfully then navigate him to his Home page. If not, show him an error with toast / error message anywhere in the form.
-
-    - There will be some other options like:
-        - Show the user a Link for Register  so that he can go to the register page. 
-        - Show users a Social Login Button ( Google/GitHub/any other social login ) . on Clicking it user authenticate with Google Navigate him to  his Home page.
-- **Sign Up**: User Registration: Create a register page with a form , so that the user can register himself in this application. 
-    - Show a Title for registration and a Form with following fields( Name , Email, Password & Register Button ) 
-    - If the user Register successfully then navigate him to his login page.
-    - If not, show him an error with toast / error message anywhere in the form.
-
-
-    - There will be some other options like 
-        - Show the user a Link for Login so that he can go to the Login page. 
-        - Show users a Social Login Button ( Google/GitHub/any other social login ) . on Clicking it user authenticate with Google Navigate the user to the Home page.
-
-- Use **BetterAuth** (email/password + Google + GitHub), toast on success/error, skeleton loaders.
-- Show relevant **toast notification** on login / signup / logout / validation error.
--  💡Don’t implement email verification or forget password method as it will inconvenience the examiner. If you want, you can add these after receiving the assignment result.
-
---- 
-
-### 7. Footer
-- Match the Figma.
-- **Left**: `বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।`
-- **Right**: *“সকল দাম সম্ভাব্য; বাজার অবস্থার ওপর নির্ভর করে পরিবর্তিত হয়।”*
-
-### 8. Responsive Design
-- The entire website must work correctly on mobile, tablet, and desktop screen sizes (grid collapses correctly, navbar + ticker stays usable, hero stacks, `btn-sm sm:btn-md`, `max-w-6xl` container, etc.).
+- **Live Demo**: [Coming Soon]
+- **Repository**: [Coming Soon]
 
 ---
 
-#	Requirement
-- Add a 404 Page for any unknown/invalid route (e.g. `/category/invalid`, `/product/unknown` → friendly  404 + “হোম পেজে ফিরে যান”)
-- Show a loading animation ( `skeleton`) while the product data is being fetched on the Home / Category page
-- Show a relevant toast notification for auth + protected-route redirects (use `react-hot-toast` / `data-rht-toaster`).
-- Make sure reloading any page after deployment does not cause an error (dynamic `[slug]` routes must work on Vercel — no hard 404 on refresh)
-
----
-
-# Challenge Requirements — 10 Marks
-
-### C1. - **Sort dropdown**:
-“সাজান” → options `ডিফল্ট`, `দাম: কম থেকে বেশি`, `দাম: বেশি থেকে কম` (default `ডিফল্ট`, with chevron icon). Must handle Bengali numerals correctly (sort by numeric value, not string).
-
-### C2. GitHub README
-- Add a well-designed `README.md` that includes:
-  - Project name (বাজার দর / BazarDor)
-  - Short description
-  - Technologies used
-  - 5 key features of the project
-
-### C3. - Update Information Feature
-- In My Profile route there will be an update button. On clicking it,  Take user to another route 
-- Show user a form with an input field (  Name ), An Update Information button.
-
-Follow this documentation: https://better-auth.com/docs/concepts/users-accounts#update-user 
-
-
----
-
-### 🛠️ Technologies to Use
-Technology	Purpose
-- Next.js ->	Build the UI
-- App router(Next.js) +	Handle page navigation
-- Tailwind CSS + Any component library	Styling and responsiveness(DaisyUI, Hero UI)
-- TypeScript / JavaScript
-- BetterAuth
-
-### 🚀 Deployment
-Deploy your project on Vercel, Netlify, Cloudflare Pages, or anywhere else before submitting.
-
-## 📬 Submission
-Fill in both links before submitting:
-
-- Live Link:
-- GitHub Repository Link:
-
-
-### Notes : You can use Bengali or English language for core website information or any kind of text.
+Made with ❤️ for Bangladesh's smart shoppers
