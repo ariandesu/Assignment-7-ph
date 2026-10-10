@@ -4,7 +4,7 @@ import { Navbar, Footer } from '@/components/layout';
 export default function Loading() {
   return (
     <>
-      <Navbar categories={[]} user={null} />
+      <Navbar categories={[]} />
       <div className="bg-accent-50 border-y border-accent-200 py-3 animate-pulse">
         <div className="container-main">
           <div className="flex items-center gap-4">

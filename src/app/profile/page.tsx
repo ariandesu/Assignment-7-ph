@@ -46,7 +46,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Navbar categories={[]} user={{ name: user.name, email: user.email, image: user.image ?? undefined }} />
+      <Navbar categories={[]} />
       <main className="flex-1">
         <div className="container-main py-12">
           <div className="mx-auto max-w-2xl">

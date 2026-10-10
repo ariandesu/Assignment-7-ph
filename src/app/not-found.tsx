@@ -4,7 +4,7 @@ import { EmptyState } from '@/components/home';
 export default function NotFound() {
   return (
     <>
-      <Navbar categories={[]} user={null} />
+      <Navbar categories={[]} />
       <main className="flex-1 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-md text-center">
           <EmptyState

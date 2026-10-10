@@ -92,7 +92,7 @@ export default function SignUpPage() {
 
   return (
     <>
-      <Navbar categories={[]} user={null} />
+      <Navbar categories={[]} />
       <main className="flex-1 flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-md">
           <Card variant="outlined" padding="lg">
