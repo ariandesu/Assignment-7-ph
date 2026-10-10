@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
-import './styles/globals.css';
+import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'বাজার দর — BazarDor',
