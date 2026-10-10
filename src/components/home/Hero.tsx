@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
 interface HeroProps {
@@ -32,15 +31,10 @@ export function Hero({ imageUrl = '/bazar-hero.png' }: HeroProps) {
             <p className="text-body-lg text-neutral-600 mb-6 max-w-lg mx-auto lg:mx-0">
               বাংলাদেশের সব বাজারের আজকের পণ্যের দাম, দামের পরিবর্তন এবং ট্রেন্ড এক জায়গায়। স্মার্ট কেনাকাটা করুন।
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+            <div className="flex items-center justify-center lg:justify-start">
               <Button size="lg" onClick={scrollToProducts} className="w-full sm:w-auto">
                 সব পণ্য দেখুন
               </Button>
-              <Link href="/category/all" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full">
-                  ক্যাটাগরি ব্রাউজ করুন
-                </Button>
-              </Link>
             </div>
           </div>
 
