@@ -115,10 +115,10 @@ export function ProductDetailView({ product, categories }: ProductDetailViewProp
                     বাজারভিত্তিক আজকের দাম
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-4 sm:p-6">
                   {product.markets && product.markets.length > 0 ? (
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left text-body-sm">
+                    <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                      <table className="w-full min-w-[500px] text-left text-body-sm">
                         <thead className="border-b border-neutral-200 bg-neutral-50 text-caption font-semibold text-neutral-600">
                           <tr>
                             <th className="py-3 px-4">বাজার</th>

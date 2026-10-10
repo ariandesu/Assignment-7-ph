@@ -133,7 +133,7 @@ export function Navbar({ categories }: NavbarProps) {
       {/* Category Navigation Row */}
       <nav className="bg-neutral-50 border-b border-neutral-200" aria-label="ক্যাটাগরি নেভিগেশন">
         <div className="container-main">
-          <div className="flex flex-wrap items-center gap-2 overflow-x-auto py-3 scrollbar-hide" role="navigation">
+          <div className="flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0" role="navigation">
             {categories.map((category) => {
               const isActive = pathname === `/category/${category.slug}`;
               return (
@@ -141,7 +141,7 @@ export function Navbar({ categories }: NavbarProps) {
                   key={category.slug}
                   href={`/category/${category.slug}`}
                   className={cn(
-                    'flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-body-sm font-medium transition-colors duration-200',
+                    'flex items-center gap-1.5 whitespace-nowrap shrink-0 rounded-lg px-3 py-2 text-body-sm font-medium transition-colors duration-200',
                     isActive
                       ? 'bg-primary-50 text-primary-700 shadow-sm'
                       : 'text-neutral-600 hover:bg-white hover:text-neutral-900'

@@ -30,38 +30,26 @@ export function Hero({ imageUrl = '/bazar-hero.png' }: HeroProps) {
               <span className="text-primary-600">এক নজরে জানুন</span>
             </h1>
             <p className="text-body-lg text-neutral-600 mb-6 max-w-lg mx-auto lg:mx-0">
-              বাংলাদেশের সব বাজারের আজকের পণ্যের দাম, দামের পরিবর্তন এবং টрен্ড এক জায়গায়। স্মার্ট কেনাকাটা করুন।
+              বাংলাদেশের সব বাজারের আজকের পণ্যের দাম, দামের পরিবর্তন এবং ট্রেন্ড এক জায়গায়। স্মার্ট কেনাকাটা করুন।
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
               <Button size="lg" onClick={scrollToProducts} className="w-full sm:w-auto">
                 সব পণ্য দেখুন
               </Button>
               <Link href="/category/all" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="w-full">
                   ক্যাটাগরি ব্রাউজ করুন
                 </Button>
               </Link>
             </div>
           </div>
 
-          {/* Right Image */}
-          <div className="flex-1 flex justify-center lg:justify-end hidden lg:block">
-            <div className="relative max-w-md">
-              <img
-                src={imageUrl}
-                alt="বাজার দর - তাজা পণ্য ও দাম"
-                className="w-full h-auto rounded-2xl shadow-xl border border-neutral-200"
-                loading="eager"
-              />
-            </div>
-          </div>
-
-          {/* Mobile Image */}
-          <div className="lg:hidden order-first">
+          {/* Hero Image - Stacks on mobile/tablet, side-by-side on desktop */}
+          <div className="flex-1 flex justify-center lg:justify-end w-full max-w-sm sm:max-w-md lg:max-w-md">
             <img
               src={imageUrl}
               alt="বাজার দর - তাজা পণ্য ও দাম"
-              className="w-full max-w-md mx-auto rounded-2xl shadow-lg border border-neutral-200"
+              className="w-full h-auto rounded-2xl shadow-xl border border-neutral-200"
               loading="eager"
             />
           </div>
