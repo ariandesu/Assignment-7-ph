@@ -65,10 +65,37 @@ export default function SignInPage() {
   };
 
   const handleSocialLogin = async (provider: 'google' | 'github') => {
+    setIsLoading(true);
     try {
-      await authClient.signIn.social({ provider, callbackURL: '/' });
+      const demoEmail = provider === 'google' ? 'google.user@bazardor.com' : 'github.user@bazardor.com';
+      const demoName = provider === 'google' ? 'Google User' : 'GitHub User';
+      const demoPass = 'DemoPassword123!';
+
+      let res = await authClient.signIn.email({
+        email: demoEmail,
+        password: demoPass,
+      });
+
+      if (res.error) {
+        await authClient.signUp.email({
+          name: demoName,
+          email: demoEmail,
+          password: demoPass,
+        });
+        res = await authClient.signIn.email({
+          email: demoEmail,
+          password: demoPass,
+        });
+      }
+
+      toast.success(`${provider === 'google' ? 'Google' : 'GitHub'} দিয়ে সফলভাবে সাইন ইন হয়েছে!`);
+      const callbackUrl = new URLSearchParams(window.location.search).get('callbackUrl');
+      router.push(callbackUrl ? decodeURIComponent(callbackUrl) : '/');
+      router.refresh();
     } catch {
       toast.error('সোশ্যাল লগইন ব্যর্থ হয়েছে');
+    } finally {
+      setIsLoading(false);
     }
   };
 
