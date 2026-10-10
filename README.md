@@ -4,19 +4,19 @@
 
 ## 📖 Project Description
 
-BazarDor (বাজার দর) is a modern, responsive web application built with Next.js 14 that provides real-time market prices for daily commodities in Bangladesh. Users can browse products by category, view price trends (risers/fallers), and see detailed price breakdowns across different markets. The application features a clean Bengali interface with Hind Siliguri typography, making it accessible to local users.
+BazarDor (বাজার দর) is a modern, responsive web application built with Next.js (App Router) that provides real-time market prices for daily commodities in Bangladesh. Users can browse products by category, view price trends (risers/fallers), and see detailed price breakdowns across different markets. The application features a clean Bengali interface with Hind Siliguri typography, making it accessible to local users.
 
 ## 🛠️ Technologies Used
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js (App Router, Turbopack)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Typography**: Hind Siliguri (Google Fonts)
-- **Authentication**: BetterAuth (Email/Password + Google + GitHub OAuth)
+- **Authentication**: BetterAuth (Email/Password + Social Login with Google & GitHub)
 - **Notifications**: React Hot Toast
 - **Icons**: Lucide React / Heroicons
 - **API Integration**: Primary & Fallback API endpoints with automatic failover
-- **Deployment**: Vercel/Netlify/Cloudflare Pages ready
+- **Deployment**: Vercel (Production Live)
 
 ## ✨ Key Features
 
@@ -182,8 +182,8 @@ This project is created for educational purposes (Programming Hero Assignment 7)
 
 ## 🔗 Links
 
-- **Live Demo**: [Coming Soon]
-- **Repository**: [Coming Soon]
+- **Live Demo**: [https://bazardor-assignment-7.vercel.app](https://bazardor-assignment-7.vercel.app)
+- **Repository**: [https://github.com/ariandesu/Assignment-7-ph](https://github.com/ariandesu/Assignment-7-ph)
 
 ---
 
