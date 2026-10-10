@@ -1,6 +1,7 @@
 import { Footer, Navbar, PriceTickerWrapper } from '@/components/layout';
 import { Hero, ProductGrid } from '@/components/home';
 import { api } from '@/lib/api';
+import { toBengaliDigits } from '@/lib/utils';
 import type { Product, Category } from '@/types';
 
 async function getHomeData(): Promise<{
@@ -36,8 +37,25 @@ function PriceError({ message }: { message: string }) {
   );
 }
 
+function movers(products: Product[], direction: 'up' | 'down') {
+  return products
+    .filter((product) =>
+      direction === 'up'
+        ? product.changeDirection === 'up' || product.changePercent > 0
+        : product.changeDirection === 'down' || product.changePercent < 0
+    )
+    .sort((a, b) =>
+      direction === 'up'
+        ? b.changePercent - a.changePercent
+        : Math.abs(b.changePercent) - Math.abs(a.changePercent)
+    )
+    .slice(0, 6);
+}
+
 export default async function Home() {
   const { products, categories, error } = await getHomeData();
+  const risers = movers(products, 'up');
+  const fallers = movers(products, 'down');
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -49,11 +67,25 @@ export default async function Home() {
           <PriceError message={error} />
         ) : (
           <div className="container-main pb-16">
+            {risers.length > 0 && (
+              <ProductGrid
+                products={risers}
+                title="আজ দাম বেড়েছে ▲"
+                subtitle="গতকালের তুলনায় যেসব পণ্যের দাম বৃদ্ধি পেয়েছে"
+              />
+            )}
+            {fallers.length > 0 && (
+              <ProductGrid
+                products={fallers}
+                title="আজ দাম কমেছে ▼"
+                subtitle="গতকালের তুলনায় যেসব পণ্যের দাম কমেছে"
+              />
+            )}
             <div id="সব-পণ্য" className="scroll-mt-40">
               <ProductGrid
                 products={products}
                 title="সব পণ্য"
-                subtitle="চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম এক জায়গায়।"
+                subtitle={`মোট ${toBengaliDigits(products.length)}টি পণ্য দেখানো হচ্ছে`}
               />
             </div>
           </div>
