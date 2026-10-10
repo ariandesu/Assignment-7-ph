@@ -26,7 +26,7 @@ This document defines the visual architecture, component hierarchy, design token
 ### 2.1 Color Tokens (Extracted from Penpot `tokens.json`)
 
 #### Base & Neutral Palette
-- **`base-100` (Background Canvas)**: `rgb(250, 252, 250)` / `#FAFCAF` — Clean, soft off-white background.
+- **`base-100` (Background Canvas)**: `rgb(250, 252, 250)` / `#FAFCFA` — Clean, soft off-white background.
 - **`base-200` (Card & Surface)**: `rgb(240, 245, 240)` / `#F0F5F0` — Card containers, neutral badges, table alternating rows.
 - **`base-300` (Borders & Dividers)**: `rgb(225, 232, 225)` / `#E1E8E1` — Component borders, input outlines, table stroke.
 - **`base-content` (Primary Text)**: `rgb(29, 39, 31)` / `#1D271F` — High-contrast charcoal text for body, headings, and data tables.
@@ -50,7 +50,7 @@ This document defines the visual architecture, component hierarchy, design token
 ## 3. Typography Specifications & Digit Rules
 
 ### 3.1 Font Family & Fallbacks
-- **Primary Font**: `Inter`, `Noto Sans Bengali`, system-ui, `-apple-system`, `sans-serif`.
+- **Primary Font**: `Hind Siliguri`, `Noto Sans Bengali`, system-ui, `-apple-system`, `sans-serif`.
 - **Text Rendering**: Subpixel antialiased, optimized for Bangla script rendering legibility across low and high DPI screens.
 
 ### 3.2 Typography Scale

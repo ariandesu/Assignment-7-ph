@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { --font-hind-siliguri: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; }
+  * { @apply border-neutral-200; }
+  html { @apply scroll-smooth; }
+  body { @apply font-hind bg-neutral-50 text-neutral-900 antialiased; }
+  *:focus-visible { @apply outline-none ring-2 ring-primary-500 ring-offset-2; }
+}
+
+@layer components {
+  .container-main { @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn bg-primary-600 text-white hover:bg-primary-700; }
+  .btn-secondary { @apply btn bg-neutral-100 text-neutral-900 hover:bg-neutral-200; }
+  .btn-outline { @apply btn border-2 border-primary-600 text-primary-600 hover:bg-primary-50; }
+  .btn-ghost { @apply btn text-neutral-600 hover:bg-neutral-100; }
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker-track { animation: ticker-scroll 45s linear infinite; }
+.ticker-track:hover, .ticker-track:focus-within { animation-play-state: paused; }
+
+@layer base {
+  :root {
+    --font-hind-siliguri: 'Hind Siliguri', system-ui, sans-serif;
+  }
+
+  * {
+    @apply border-neutral-200;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-hind text-neutral-900 bg-neutral-50 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full hover:bg-neutral-400;
+  }
+
+  ::-webkit-scrollbar-corner {
+    @apply bg-neutral-100;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-main {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-body-md font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 focus-visible:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300 focus-visible:ring-neutral-500;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-600 text-primary-600 hover:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-500;
+  }
+
+  .btn-ghost {
+    @apply btn text-neutral-600 hover:bg-neutral-100 active:bg-neutral-200 focus-visible:ring-neutral-500;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger text-white hover:bg-danger-dark active:bg-danger focus-visible:ring-danger;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-body-sm;
+  }
+
+  .btn-lg {
+    @apply px-6 py-3 text-body-lg;
+  }
+
+  .btn-xl {
+    @apply px-8 py-4 text-heading-sm;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-body-md text-neutral-900 placeholder:text-neutral-400 transition-colors duration-200 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 disabled:bg-neutral-100 disabled:cursor-not-allowed;
+  }
+
+  .input-error {
+    @apply border-danger focus:border-danger focus:ring-danger/20;
+  }
+
+  .label {
+    @apply block mb-1.5 text-body-sm font-medium text-neutral-700;
+  }
+
+  .form-group {
+    @apply space-y-1.5;
+  }
+
+  .error-message {
+    @apply text-body-sm text-danger;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl bg-white shadow-sm border border-neutral-200 overflow-hidden transition-shadow duration-200 hover:shadow-md;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-caption font-medium;
+  }
+
+  .badge-success {
+    @apply badge bg-success-light text-success-dark;
+  }
+
+  .badge-danger {
+    @apply badge bg-danger-light text-danger-dark;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning-light text-warning-dark;
+  }
+
+  .badge-neutral {
+    @apply badge bg-neutral-100 text-neutral-600;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-50 text-primary-700;
+  }
+
+  /* Skeleton loaders */
+  .skeleton {
+    @apply animate-pulse bg-neutral-200 rounded;
+  }
+
+  .skeleton-text {
+    @apply skeleton h-4 w-full;
+  }
+
+  .skeleton-title {
+    @apply skeleton h-6 w-3/4;
+  }
+
+  .skeleton-avatar {
+    @apply skeleton h-12 w-12 rounded-full;
+  }
+
+  .skeleton-card {
+    @apply skeleton aspect-square w-full rounded-xl;
+  }
+
+  .skeleton-btn {
+    @apply skeleton h-10 w-24 rounded-lg;
+  }
+
+  /* Toast customization */
+  .toast-success {
+    @apply bg-success-dark text-white;
+  }
+
+  .toast-error {
+    @apply bg-danger text-white;
+  }
+
+  .toast-loading {
+    @apply bg-neutral-800 text-white;
+  }
+}
+
+@layer utilities {
+  /* Text clamp utilities */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee 30s linear infinite reverse;
+  }
+
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-500;
+  }
+
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50;
+  }
+}
