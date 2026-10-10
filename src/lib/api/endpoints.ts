@@ -7,13 +7,14 @@
  * wrong-shaped body is treated like any other retryable failure and the
  * fallback host gets its chance.
  *
- * Live contract notes (verified against both hosts, 2026-10-10):
+ * Live contract notes (verified against openapi.programming-hero.com, 2026-10-10):
  *   - GET /products               -> Product[]
- *   - GET /products?category=slug -> Product[] ([] for unknown slug)
- *   - GET /products/{id}          -> Product   (numeric id only; slugs 404)
+ *   - GET /products?category=slug -> Product[]
+ *   - GET /products?slug=slug     -> Product[] (one-item list)
+ *   - GET /products/{id}          -> Product   (numeric id)
  *   - GET /categories             -> Category[]
- *   - GET /categories/{slug}      -> Category  (404 for unknown slug)
- *   - Unknown product/slug/category -> 404 {"error":"Not found"} (no fallback, per policy)
+ *   - GET /categories/{slug}      -> Category
+ *   - Unknown product/category -> 404 {"error":"Not found"} (no fallback, per policy)
  */
 
 import { ApiError, requestJson, type ApiRequestOptions } from "./client";
@@ -106,15 +107,16 @@ export async function getProductById(id: number, options?: ApiRequestOptions): P
 }
 
 /**
- * Resolve a product by its slug.
- *
- * The API only resolves numeric ids on /products/{id} (verified: slugs 404 on
- * both hosts), so slugs are resolved against the product list. Throws ApiError
- * kind "notFound" when the slug does not exist.
+ * Resolve a product by its slug using the API's supported slug filter.
+ * The endpoint returns a one-item Product[] response.
  */
 export async function getProductBySlug(slug: string, options?: ApiRequestOptions): Promise<Product> {
-  const products = await getProducts(options);
-  const found = products.find((product) => product.slug === slug);
+  const products = await requestJson<Product[]>(`/products?${new URLSearchParams({ slug }).toString()}`, {
+    ...options,
+    validate: isProductArray,
+    expected: "Product[]",
+  });
+  const found = products[0];
   if (!found) {
     throw new ApiError({
       kind: "notFound",

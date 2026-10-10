@@ -60,8 +60,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```env
 # API Configuration
-NEXT_PUBLIC_API_URL_1=https://api.api-store.workers.dev/api/bazardor
-NEXT_PUBLIC_API_URL_2=https://api.abcz.workers.dev/api/bazardor
+NEXT_PUBLIC_API_BASE_URL=https://openapi.programming-hero.com/api/bazardor
+NEXT_PUBLIC_API_FALLBACK_BASE_URL=https://api.abcz.workers.dev/api/bazardor
+NEXT_PUBLIC_API_TIMEOUT_MS=8000
 
 # BetterAuth Configuration
 BETTER_AUTH_SECRET=your-secret-key
@@ -126,7 +127,7 @@ src/
 | `GET /categories` | All categories |
 | `GET /categories/{slug}` | Category with products |
 
-**Primary API**: `https://api.api-store.workers.dev/api/bazardor`  
+**Primary API**: `https://openapi.programming-hero.com/api/bazardor`
 **Fallback API**: `https://api.abcz.workers.dev/api/bazardor`
 
 ## 🎨 Design Tokens

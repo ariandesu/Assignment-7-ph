@@ -168,16 +168,13 @@ export function Navbar({ categories }: NavbarProps) {
 function getBanglaDate(): string {
   const now = new Date();
   const banglaMonths = [
-    'বৈশাখ', 'জ্যৈষ্ঠ', 'আষাঢ়', 'শ্রাবণ', 'ভাদ্র', 'আশ্বিন',
-    'কার্তিক', 'অগ্রহায়ণ', 'পৌষ', 'মাঘ', 'ফাল্গুন', 'চৈত্র'
+    'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
+    'জুলাই', 'অগাস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
   ];
-  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
 
   const month = now.getMonth();
   const day = now.getDate();
-  const year = now.getFullYear() - 593;
+  const year = now.getFullYear();
 
-  const toBengali = (num: number) => String(num).replace(/\d/g, (d) => banglaDigits[parseInt(d, 10)]);
-
-  return `${banglaMonths[month]} ${toBengali(day)}, ${toBengali(year)}`;
+  return `${banglaMonths[month]} ${day}, ${year}`;
 }

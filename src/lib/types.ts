@@ -2,13 +2,14 @@
  * Shared API contract for the BazarDor backend (Cloudflare Workers).
  *
  * Source of truth: live responses from
- *   https://api.api-store.workers.dev/api/bazardor
- *   https://api.abcz.workers.dev/api/bazardor  (fallback, identical shape)
+ *   https://openapi.programming-hero.com/api/bazardor
+ *   https://api.abcz.workers.dev/api/bazardor  (fallback)
  *
  * Endpoints (all GET, all JSON):
  *   /products                     -> Product[]
- *   /products?category={slug}     -> Product[] ([] when slug is unknown)
- *   /products/{id}                -> Product   (404 for unknown id; slug lookup 404s — resolve slug via list)
+ *   /products?category={slug}     -> Product[]
+ *   /products?slug={slug}         -> Product[] (one-item list)
+ *   /products/{id}                -> Product   (404 for unknown id)
  *   /categories                   -> Category[]
  *   /categories/{slug}            -> Category  (404 for unknown slug)
  */

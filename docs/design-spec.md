@@ -221,7 +221,7 @@ All numeric representations in the application UI — including product prices (
                                     v
                     +---------------+----------------+
                     | Try Primary Base URL (BASE 1)  |
-                    | api.api-store.workers.dev      |
+                    | openapi.programming-hero.com   |
                     +---------------+----------------+
                                     |
                         +-----------+-----------+
@@ -246,7 +246,7 @@ All numeric representations in the application UI — including product prices (
 ```
 
 1. **Automatic Failover Execution**:
-   - Primary Base URL: `https://api.api-store.workers.dev/api/bazardor`
+   - Primary Base URL: `https://openapi.programming-hero.com/api/bazardor`
    - Fallback Base URL: `https://api.abcz.workers.dev/api/bazardor`
    - The application client MUST make all data calls against `BASE_URL_1` initially.
    - If `BASE_URL_1` returns network error, timeout, or 5xx server status, client automatically retries seamless fetch against `BASE_URL_2` without showing runtime error popups.

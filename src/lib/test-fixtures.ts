@@ -1,6 +1,6 @@
 /**
  * Test fixtures shaped exactly like live API responses (verified 2026-10-10
- * against https://api.api-store.workers.dev/api/bazardor). Values are the real
+ * against https://openapi.programming-hero.com/api/bazardor). Values are the real
  * published figures for the products below, so tests double as a contract
  * sanity check — if the API changes shape, these tests are where it shows up.
  */

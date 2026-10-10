@@ -24,7 +24,7 @@ This document serves as the official Product Manager & Scrum Master Acceptance C
 
 ## 2. Data & API Integration
 - [ ] **Primary & Fallback API Architecture**:
-  - [ ] **Primary API Base URL**: `https://api.api-store.workers.dev/api/bazardor`
+  - [ ] **Primary API Base URL**: `https://openapi.programming-hero.com/api/bazardor`
   - [ ] **Fallback API Base URL**: `https://api.abcz.workers.dev/api/bazardor`
   - [ ] **Primary-then-Fallback Failover Logic**: The application MUST initiate all data requests against `BASE_URL_1`. If `BASE_URL_1` experiences network failure, timeout, or 5xx server errors, the client MUST automatically and seamlessly fail over to `BASE_URL_2` without throwing unhandled UI errors.
 - [ ] **API Endpoint Coverage**:

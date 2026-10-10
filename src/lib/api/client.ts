@@ -29,7 +29,7 @@ import type { ApiErrorBody } from "@/lib/types";
 export const PRIMARY_BASE_URL: string =
   (typeof process.env.NEXT_PUBLIC_API_BASE_URL === "string" &&
     process.env.NEXT_PUBLIC_API_BASE_URL.trim().replace(/\/+$/, "")) ||
-  "https://api.api-store.workers.dev/api/bazardor";
+  "https://openapi.programming-hero.com/api/bazardor";
 
 /**
  * Fallback API host — tried when the primary fails retryably (see policy above).

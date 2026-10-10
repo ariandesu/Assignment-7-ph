@@ -1,11 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
-import { Skeleton, SkeletonCard, SkeletonGrid } from '@/components/ui/Skeleton';
+import { SkeletonCard, Skeleton, SkeletonGrid } from '@/components/ui/Skeleton';
 import { Button } from '@/components/ui/Button';
-import { formatPrice, formatPriceChange, toBengaliDigits } from '@/lib/utils';
+import { toBengaliDigits } from '@/lib/utils';
 import type { Product } from '@/types';
 
 interface ProductCardProps {
@@ -14,71 +12,53 @@ interface ProductCardProps {
   skeleton?: boolean;
 }
 
-export function ProductCard({ product, priority = false, skeleton = false }: ProductCardProps) {
-  if (skeleton) {
-    return <SkeletonCard />;
-  }
+/** Product Card matched to the Figma Product Card component. */
+export function ProductCard({ product, skeleton = false }: ProductCardProps) {
+  if (skeleton) return <SkeletonCard />;
 
-  const { label: changeLabel, direction } = formatPriceChange(product.changePercent);
+  const pct = product.changePercent;
+  const absPct = Math.abs(pct);
+  const formattedPct = toBengaliDigits(absPct.toFixed(1));
+  const isUp = pct > 0;
+  const isDown = pct < 0;
+  const arrow = isUp ? '▲' : isDown ? '▼' : '—';
+  const badgeColor = isUp ? 'text-[#1A9951]' : isDown ? 'text-[#D03739]' : 'text-[#1D271F]';
+  const price = toBengaliDigits(product.price.toLocaleString('en-US'));
 
   return (
-    <Link href={`/product/${product.id}`} className="block" aria-label={`${product.name} - ${formatPrice(product.price)}`}>
-      <Card variant="hover" padding="none">
-        {/* Product Image/Emoji */}
-        <div className="aspect-square bg-neutral-50 flex items-center justify-center overflow-hidden relative">
-          {product.image ? (
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              loading={priority ? 'eager' : 'lazy'}
-            />
-          ) : (
-            <span className="text-5xl lg:text-6xl" aria-hidden="true">{product.emoji || '📦'}</span>
-          )}
-          
-          {/* Change Badge Overlay */}
-          <div className="absolute top-2 right-2">
-            <Badge
-              variant={
-                direction === 'up' ? 'success' :
-                direction === 'down' ? 'danger' : 'neutral'
-              }
-              size="sm"
-            >
-              {changeLabel}
-            </Badge>
+    <Link
+      href={`/product/${product.slug}`}
+      className="block rounded-2xl border border-[#E1E8E1] bg-[#FAFCFA] transition-shadow duration-200 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+      aria-label={`${product.name} - আজকের দাম ${price} টাকা`}
+    >
+      <div className="flex flex-col gap-3 p-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F0F5F0]" aria-hidden="true">
+            <span className="text-2xl leading-none">{product.emoji || '📦'}</span>
+          </div>
+          <div className="min-w-0">
+            <h3 className="truncate text-base font-semibold leading-snug text-[#1D271F]">{product.name}</h3>
+            <p className="mt-0.5 text-xs font-normal leading-normal text-[#1D271F]/80">{product.unit}</p>
           </div>
         </div>
 
-        {/* Product Info */}
-        <CardContent className="p-4">
-          <h3 className="text-heading-sm font-semibold text-neutral-900 line-clamp-1 mb-1">
-            {product.name}
-          </h3>
-          
-          <p className="text-body-sm text-neutral-500 mb-2">
-            {product.unit}
-          </p>
-
-          {/* Price Row */}
-          <div className="flex items-baseline justify-between gap-2">
-            <div>
-              <span className="text-caption text-neutral-500">আজকের দাম</span>
-              <p className="text-heading-md font-bold text-neutral-900">
-                {formatPrice(product.price)}
-              </p>
-            </div>
-            
-            {/* Unit badge */}
-            <Badge variant="primary" size="sm">
-              {toBengaliDigits(product.unit.includes('কেজি') ? 'কেজি' : 
-                product.unit.includes('লিটার') ? 'লিটার' :
-                product.unit.includes('ডজন') ? 'ডজন' : 'পিস')}
-            </Badge>
+        <div className="flex items-end justify-between gap-2">
+          <div>
+            <p className="text-xs font-normal leading-normal text-[#1D271F]/80">আজকের দাম</p>
+            <p className="mt-0.5 leading-tight text-[#1D271F]">
+              <span className="text-xl font-bold">{price}</span>{' '}
+              <span className="text-sm font-medium">টাকা</span>
+            </p>
           </div>
-        </CardContent>
-      </Card>
+          <div
+            className={`flex shrink-0 items-center gap-1 rounded-xl bg-[#F0F5F0] px-2 py-1 text-xs font-semibold ${badgeColor}`}
+            aria-label={`মূল্য পরিবর্তন ${arrow} ${formattedPct}%`}
+          >
+            <span className="font-normal" aria-hidden="true">{arrow}</span>
+            <span>{formattedPct}%</span>
+          </div>
+        </div>
+      </div>
     </Link>
   );
 }
@@ -160,7 +140,7 @@ export function ProductGrid({
         </div>
       )}
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product, index) => (
           <ProductCard key={`${product.id}-${index}`} product={product} priority={index < 4} />
         ))}

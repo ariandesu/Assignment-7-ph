@@ -95,14 +95,16 @@ describe("getProductById / getProductBySlug", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it("resolves a slug against the product list (API has no slug endpoint)", async () => {
-    route({ [PRODUCTS_URL]: async () => jsonResponse([sornoMachiChal]) });
+  it("uses the API slug filter endpoint", async () => {
+    const slugUrl = `${PRODUCTS_URL}?slug=sorno-machi-chal`;
+    route({ [slugUrl]: async () => jsonResponse([sornoMachiChal]) });
     const product = await getProductBySlug("sorno-machi-chal");
     expect(product.id).toBe(1);
+    expect(String(fetchMock.mock.calls[0]?.[0])).toBe(slugUrl);
   });
 
   it("throws notFound ApiError for an unknown slug", async () => {
-    route({ [PRODUCTS_URL]: async () => jsonResponse([sornoMachiChal]) });
+    route({ [`${PRODUCTS_URL}?slug=nope`]: async () => jsonResponse([]) });
     const error = (await getProductBySlug("nope").catch((e: unknown) => e)) as ApiError;
     expect(error).toBeInstanceOf(ApiError);
     expect(error.kind).toBe("notFound");

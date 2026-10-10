@@ -1,11 +1,11 @@
 import { Footer, Navbar, PriceTickerWrapper } from '@/components/layout';
 import { Hero, ProductGrid } from '@/components/home';
 import { api } from '@/lib/api';
-import type { Product } from '@/types';
+import type { Product, Category } from '@/types';
 
 async function getHomeData(): Promise<{
   products: Product[];
-  categories: Awaited<ReturnType<typeof api.getCategories>>;
+  categories: Category[];
   error?: string;
 }> {
   try {
@@ -36,19 +36,8 @@ function PriceError({ message }: { message: string }) {
   );
 }
 
-function movers(products: Product[], direction: 'up' | 'down') {
-  return products
-    .filter((product) => product.changeDirection === direction)
-    .sort((a, b) => direction === 'up'
-      ? b.changePercent - a.changePercent
-      : a.changePercent - b.changePercent)
-    .slice(0, 6);
-}
-
 export default async function Home() {
   const { products, categories, error } = await getHomeData();
-  const risers = movers(products, 'up');
-  const fallers = movers(products, 'down');
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -60,16 +49,6 @@ export default async function Home() {
           <PriceError message={error} />
         ) : (
           <div className="container-main pb-16">
-            <ProductGrid
-              products={risers}
-              title="আজ দাম বেড়েছে ▲"
-              subtitle="আজকের সবচেয়ে বেশি বাড়তি দামের পণ্য"
-            />
-            <ProductGrid
-              products={fallers}
-              title="আজ দাম কমেছে ▼"
-              subtitle="আজকের সবচেয়ে বেশি কমতি দামের পণ্য"
-            />
             <div id="সব-পণ্য" className="scroll-mt-40">
               <ProductGrid
                 products={products}
